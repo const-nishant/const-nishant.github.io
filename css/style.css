@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
 
 * {
     margin: 0;
@@ -18,7 +19,7 @@ html {
 }
 
 :root {
-    --bg-color: #1e1e1e;
+    --bg-color: #141414;
     --second-bg-color: #001005;
     --text-color: #fff;
     --main-color: #00ff51;
@@ -47,6 +48,7 @@ span {
     color: var(--main-color);
 }
 
+
 #menu-icon {
     display: none;
     font-size: 3.6rem;
@@ -54,7 +56,7 @@ span {
 }
 
 .logo {
-    font-size: 3rem;
+    font-size: 2.8rem;
     font-family: 'Silkscreen', cursive;
     color: var(--text-color);
     font-weight: 400;
@@ -65,7 +67,7 @@ span {
 .navbar a {
     font-size: 1.8rem;
     font-family: 'pt mono', monospace;
-    color: var(--text-color);
+    color: var(--main-color);
     font-weight: 400;
     margin-left: 3.5rem;
     transition: 0.3s ease;
@@ -73,11 +75,7 @@ span {
     transition: 0.3s ease;
 }
 
-.navbar a:hover,
-.navbar a.active {
-    border-bottom: 2px solid var(--main-color);
-    color: var(--main-color);
-}
+
 
 section {
     /* min-height: 100vh; */
@@ -85,8 +83,7 @@ section {
 }
 
 .home {
-    margin-top: 10rem;
-    /* display: flex; */
+    margin-top: 8rem;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -95,12 +92,9 @@ section {
 
 .main-content {
     display: flex;
-    /* align-items: column; */
     justify-content: space-around;
     flex-direction: column;
-
     width: 100%;
-    /* text-align: center */
 }
 
 .home-content {
@@ -109,8 +103,38 @@ section {
     width: 100%;
     gap: 26rem;
     align-items: center;
-
     text-align: right;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.about-content h3 {
+    font-family: 'pt mono', monospace;
+    font-size: 4rem;
+    margin: 2rem 0;
+}
+
+.about-text {
+    text-align: center;
+    width: 60%;
+}
+
+.about-text p {
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-family: 'pt mono', monospace;
+    width: 80%;
+    margin: 0 auto;
+    line-height: 2.5rem;
+    text-align: left;
 }
 
 .home-content h1 {
@@ -125,12 +149,16 @@ section {
     margin: 1rem 0;
 
 }
-
+.home-text {
+    text-align: left;
+}
 .home-content p {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 500;
     width: 80%;
-    margin-inline-start: auto;
+    /* margin-inline-start: auto; */
+    font-family: 'pt mono', monospace;
+    text-align: left;
     line-height: 1.2;
 }
 
@@ -167,7 +195,7 @@ footer p {
 }
 
 .social-icons {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 .social-icons a {
@@ -187,8 +215,34 @@ footer p {
     box-shadow: 0 0 25px var(--main-color);
 }
 
+.contact-info {
+    display: flex;
+    font-family: "Major Mono Display", monospace;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
 
-
+.contact-item {
+    background-color: #00FF87;
+    color: black;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.05rem;
+    text-decoration: none;
+    display: inline-block;
+}
+.contact-info span {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--bg-color);
+    font-family: "major mono display", monospace;
+}
+.contact-item:hover {
+    background-color: #00cc6e;
+}
 
 /* .btn-group{
     display: flex;
