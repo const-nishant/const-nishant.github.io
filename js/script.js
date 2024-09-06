@@ -1,22 +1,27 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Select elements
-    const menuIcon = document.querySelector('#menu-icon');
-    const navbarMobile = document.querySelector('.navbar-mobile');
 
-    // Ensure elements exist before adding event listeners
-    if (menuIcon && navbarMobile) {
-        // Event listener for menu icon
-        menuIcon.addEventListener('click', () => {
-            navbarMobile.classList.toggle('show');
-        });
 
-        // Close mobile menu when clicking outside of it
-        document.addEventListener('click', (e) => {
-            if (!navbarMobile.contains(e.target) && !menuIcon.contains(e.target)) {
-                navbarMobile.classList.remove('show');
-            }
-        });
+const menuIcon = document.getElementById('menu-icon');
+const navbarMobile = document.getElementsByClassName('navbar-mobile')[0];
+const navbarLinks = document.querySelectorAll('.navbar-mobile a');
+
+// Add event listener to the menu icon
+menuIcon.addEventListener('click', function () {
+    // Check current display status using computed styles
+    const currentDisplay = window.getComputedStyle(navbarMobile).display;
+
+    // Toggle display of the mobile navbar
+    if (currentDisplay === 'none') {
+        navbarMobile.style.display = 'flex';
     } else {
-        console.error('Menu icon or mobile navbar not found');
+        navbarMobile.style.display = 'none';
     }
 });
+
+// Add event listeners to all navbar links to hide the navbar after click
+navbarLinks.forEach(link => {
+    link.addEventListener('click', function () {
+        navbarMobile.style.display = 'none';
+    });
+});
+
+
