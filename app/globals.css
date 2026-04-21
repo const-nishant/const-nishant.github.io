@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Palette — deep space ── */
+  --color-bg: #030014;
+  --color-bg-deep: #06061a;
+  --color-surface: rgba(255, 255, 255, 0.028);
+  --color-surface-hover: rgba(255, 255, 255, 0.06);
+  --color-surface-strong: rgba(8, 8, 28, 0.92);
+  --color-glass: rgba(16, 14, 36, 0.5);
+  --color-glass-hover: rgba(24, 20, 52, 0.6);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-glass-border-focus: rgba(147, 122, 255, 0.5);
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-border-hover: rgba(255, 255, 255, 0.14);
+  --color-accent: #937aff;
+  --color-accent-soft: #7c5dff;
+  --color-accent-glow: rgba(147, 122, 255, 0.2);
+  --color-teal: #2dd4a8;
+  --color-teal-glow: rgba(45, 212, 168, 0.15);
+  --color-coral: #ff8b7a;
+  --color-coral-glow: rgba(255, 139, 122, 0.15);
+  --color-amber: #ffb75e;
+  --color-amber-glow: rgba(255, 183, 94, 0.15);
+  --color-text-main: #eef0ff;
+  --color-text-muted: rgba(238, 240, 255, 0.58);
+  --color-text-soft: rgba(238, 240, 255, 0.32);
+  --color-dot-red: #ff5f57;
+  --color-dot-yellow: #febd2e;
+  --color-dot-green: #28c840;
+
+  /* ── Fonts ── */
+  --font-display: var(--font-syne), system-ui, sans-serif;
+  --font-body: var(--font-dm-sans), system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, monospace;
+
+  /* ── Radii ── */
+  --radius-window: 14px;
+}
+
+/* ── Base ── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-text-main);
+    background: var(--color-bg);
+    overflow: hidden;
+    height: 100dvh;
+    width: 100vw;
+    line-height: 1.6;
+    user-select: none;
+  }
+
+  ::selection { background: rgba(147, 122, 255, 0.35); }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(147, 122, 255, 0.18); border-radius: 999px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(147, 122, 255, 0.35); }
+}
+
+/* ── Noise overlay ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.018;
+  mix-blend-mode: overlay;
+}
+
+/* ── Glass utility ── */
+.glass-panel {
+  background: var(--color-glass);
+  backdrop-filter: blur(32px) saturate(1.6);
+  -webkit-backdrop-filter: blur(32px) saturate(1.6);
+  border: 1px solid var(--color-glass-border);
+}
+
+.glass-panel-strong {
+  background: var(--color-surface-strong);
+  backdrop-filter: blur(40px) saturate(1.8);
+  -webkit-backdrop-filter: blur(40px) saturate(1.8);
+  border: 1px solid var(--color-glass-border);
+}
+
+/* Window glow for focused state */
+.window-glow {
+  box-shadow:
+    0 0 0 1px rgba(147, 122, 255, 0.35),
+    0 2px 8px rgba(147, 122, 255, 0.08),
+    0 20px 60px -12px rgba(0, 0, 0, 0.5),
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.window-shadow {
+  box-shadow:
+    0 20px 60px -12px rgba(0, 0, 0, 0.5),
+    0 4px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+/* ── Keyframes ── */
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 3px var(--color-teal-glow); opacity: 1; }
+  50% { box-shadow: 0 0 0 7px rgba(45, 212, 168, 0.05); opacity: 0.7; }
+}
+
+@keyframes orb-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(40px, -50px) scale(1.08); }
+  50% { transform: translate(-30px, 30px) scale(0.94); }
+  75% { transform: translate(20px, -20px) scale(1.04); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes loading-bar {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes boot-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes float-in {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ── Dock specific ── */
+.dock-glass {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  backdrop-filter: blur(40px) saturate(1.8);
+  -webkit-backdrop-filter: blur(40px) saturate(1.8);
+  box-shadow:
+    0 -1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ── Menu bar ── */
+.menubar-glass {
+  background: linear-gradient(
+    180deg,
+    rgba(12, 10, 30, 0.88) 0%,
+    rgba(8, 8, 24, 0.82) 100%
+  );
+  backdrop-filter: blur(50px) saturate(2);
+  -webkit-backdrop-filter: blur(50px) saturate(2);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04),
+    0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
